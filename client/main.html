@@ -1,0 +1,82 @@
+<template name="home">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <title>Encurtador de URL</title>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="jumbotron">
+          <h1 class="display-4">Encurtador de URL!</h1>
+          <hr class="my-4">
+          <p class="lead">
+              {{> urlsShortener}}
+          </p>
+      </div>
+
+      {{>listagem}}
+    </div>
+  </body>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</template>
+
+<template name="urlsShortener">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Digite sua URL:</label>
+
+    <div class="input-group mb-2 mr-sm-2">
+      <input id="url" type="text" class="form-control" aria-describedby="urlHelp" placeholder="Digite sua URL...">
+      <div class="input-group-append">
+        <button id="encurtar" class="btn btn-primary btn-lg" role="button">Encurtar</button>
+      </div>
+      <!-- <small id="urlHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          Resultado
+          <span id="copiar" href="#" class="btn badge badge-light">
+            <svg x="0px" y="0px" width="15px" height="15px" viewBox="0 0 561 561">
+                <path d="M395.25,0h-306c-28.05,0-51,22.95-51,51v357h51V51h306V0z M471.75,102h-280.5c-28.05,0-51,22.95-51,51v357
+                  c0,28.05,22.95,51,51,51h280.5c28.05,0,51-22.95,51-51V153C522.75,124.95,499.8,102,471.75,102z M471.75,510h-280.5V153h280.5V510
+                  z"/>
+            </svg>
+          </span>
+        </h5>
+        <a id="shortUrlViewer" href="{{shortUrl}}" target="_blank" class="card-link">{{shortUrl}}</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="listagem">
+  <div>
+    <h3 class="card-title">Top 3 URLs encurtadas</h3>
+    <ul class="list-group">
+      {{#each urls_mais_encurtadas}}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+          <a href="{{_id}}">{{_id}}</a>
+          <span class="badge badge-primary badge-pill">{{total}}</span>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  <br>
+  <div>
+    <h3 class="card-title">Últimas 10 URLs encurtadas</h3>
+    <ul class="list-group">
+      {{#each ultimas_urls}}
+        <li class="list-group-item">
+          <a href="{{_id}}">{{url}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  
+</template>
